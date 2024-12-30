@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Menu, MapPin, LogOut } from "lucide-react";
+import { Search, Menu, MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Navigation = () => {
   const navigate = useNavigate();
@@ -36,6 +43,11 @@ export const Navigation = () => {
     navigate('/login');
   };
 
+  const handleMessages = () => {
+    // TODO: Implement messages functionality
+    console.log('Messages clicked');
+  };
+
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
@@ -59,19 +71,43 @@ export const Navigation = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="hidden md:flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
-              Location
-            </Button>
             {user ? (
-              <Button 
-                variant="ghost" 
-                onClick={handleSignOut}
-                className="flex items-center gap-2"
-              >
-                <LogOut className="h-4 w-4" />
-                Sign Out
-              </Button>
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleMessages}
+                  className="relative"
+                >
+                  <MessageSquare className="h-5 w-5" />
+                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon">
+                      <Menu className="h-5 w-5" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem onSelect={() => navigate('/account')}>
+                      Account
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => navigate('/reservations')}>
+                      Reservations
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => navigate('/settings')}>
+                      Settings
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onSelect={() => navigate('/register-business')}>
+                      Register a Business
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onSelect={handleSignOut}>
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
             ) : (
               <Button 
                 variant="default" 

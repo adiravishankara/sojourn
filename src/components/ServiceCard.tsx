@@ -2,6 +2,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ServiceCardProps {
   title: string;
@@ -11,9 +13,11 @@ interface ServiceCardProps {
   category: string;
   imageUrl: string;
   businessName: string;
+  id: string;
 }
 
 export const ServiceCard = ({
+  id,
   title,
   description,
   price,
@@ -22,6 +26,18 @@ export const ServiceCard = ({
   imageUrl,
   businessName,
 }: ServiceCardProps) => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+
+  const handleBookNow = () => {
+    // TODO: Implement proper booking flow
+    toast({
+      title: "Booking Service",
+      description: "This feature is coming soon!",
+    });
+    // navigate(`/book/${id}`); // Uncomment when booking page is implemented
+  };
+
   return (
     <Card className="overflow-hidden transition-all duration-300 hover:shadow-lg animate-fade-in">
       <div className="relative aspect-video overflow-hidden">
@@ -49,7 +65,11 @@ export const ServiceCard = ({
         <span className="text-lg font-semibold text-primary-600">
           ${price.toFixed(2)}
         </span>
-        <Button variant="default" className="bg-primary-600 hover:bg-primary-700">
+        <Button 
+          variant="default" 
+          className="bg-primary-600 hover:bg-primary-700"
+          onClick={handleBookNow}
+        >
           Book Now
         </Button>
       </CardFooter>
