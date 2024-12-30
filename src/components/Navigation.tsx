@@ -1,8 +1,41 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Menu, MapPin } from "lucide-react";
+import { Search, Menu, MapPin, LogOut } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 export const Navigation = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user ?? null);
+      if (!session && event === 'SIGNED_OUT') {
+        navigate('/login');
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [navigate]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+  };
+
+  const handleSignIn = () => {
+    navigate('/login');
+  };
+
   return (
     <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
@@ -30,9 +63,24 @@ export const Navigation = () => {
               <MapPin className="h-4 w-4" />
               Location
             </Button>
-            <Button variant="default" className="bg-primary-600 hover:bg-primary-700">
-              Sign In
-            </Button>
+            {user ? (
+              <Button 
+                variant="ghost" 
+                onClick={handleSignOut}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign Out
+              </Button>
+            ) : (
+              <Button 
+                variant="default" 
+                className="bg-primary-600 hover:bg-primary-700"
+                onClick={handleSignIn}
+              >
+                Sign In
+              </Button>
+            )}
           </div>
         </div>
         
