@@ -6,7 +6,7 @@ import { Grid, Map } from "lucide-react";
 // Mock data for initial development
 const services = [
   {
-    id: 1,
+    id: "1",
     title: "Professional Photography Session",
     description: "Capture your special moments with our experienced photographers. Perfect for events, portraits, and commercial shoots.",
     price: 199.99,
@@ -16,7 +16,7 @@ const services = [
     businessName: "Creative Lens Studio"
   },
   {
-    id: 2,
+    id: "2",
     title: "Home Cleaning Service",
     description: "Comprehensive home cleaning service including deep cleaning, sanitization, and organization.",
     price: 89.99,
@@ -26,7 +26,7 @@ const services = [
     businessName: "Sparkle Home Services"
   },
   {
-    id: 3,
+    id: "3",
     title: "Personal Training Session",
     description: "One-on-one fitness training tailored to your goals with certified personal trainers.",
     price: 75.00,
@@ -36,7 +36,7 @@ const services = [
     businessName: "Elite Fitness"
   },
   {
-    id: 4,
+    id: "4",
     title: "Mobile Car Detailing",
     description: "Professional car detailing service that comes to your location. Interior and exterior cleaning available.",
     price: 149.99,
