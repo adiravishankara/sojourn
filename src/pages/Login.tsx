@@ -41,10 +41,31 @@ const Login = () => {
                   brandAccent: 'rgb(29 78 216)',
                 }
               }
+            },
+            // Add better styling for error messages
+            style: {
+              message: {
+                color: 'rgb(220 38 38)',
+                marginTop: '8px',
+                fontSize: '0.875rem'
+              }
             }
           }}
           providers={["google", "facebook"]}
           redirectTo={window.location.origin}
+          // Add localization for better error messages
+          localization={{
+            variables: {
+              sign_up: {
+                password_label: 'Password (minimum 6 characters)',
+                password_input_placeholder: 'Enter a secure password (6+ characters)'
+              },
+              sign_in: {
+                password_label: 'Your password',
+                password_input_placeholder: 'Enter your password'
+              }
+            }
+          }}
         />
       </Card>
     </div>
