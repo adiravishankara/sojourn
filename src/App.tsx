@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Landing from "./pages/Landing";
+import PortalSelection from "./pages/PortalSelection";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,8 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/dashboard" element={<Index />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/portal-selection" element={<PortalSelection />} />
+          <Route path="/business" element={<Navigate to="/dashboard" />} /> {/* Temporary redirect until business page is implemented */}
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
