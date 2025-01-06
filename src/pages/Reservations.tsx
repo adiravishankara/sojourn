@@ -13,10 +13,21 @@ const Reservations = () => {
 
   useEffect(() => {
     const fetchReservations = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.user) {
+        toast({
+          title: "Error",
+          description: "Please login to view reservations",
+          variant: "destructive",
+        });
+        return;
+      }
+
       const { data, error } = await supabase
         .from('appointments')
         .select('*, services(name)')
-        .eq('user_id', supabase.auth.user()?.id);
+        .eq('user_id', session.user.id);
 
       if (error) {
         toast({
@@ -33,10 +44,22 @@ const Reservations = () => {
   }, [toast]);
 
   const handleDelete = async (id) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session?.user) {
+      toast({
+        title: "Error",
+        description: "Please login to delete reservations",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const { error } = await supabase
       .from('appointments')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .eq('user_id', session.user.id); // Add this line for security
 
     if (error) {
       toast({
@@ -68,10 +91,16 @@ const Reservations = () => {
                 </p>
                 <Badge className="mt-2">{reservation.status}</Badge>
               </div>
-              <Button variant="outline" onClick={() => handleDelete(reservation.id)}>
-                <Trash2 className="mr-2" />
-                Delete
-              </Button>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm">
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  Chat
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => handleDelete(reservation.id)}>
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Cancel
+                </Button>
+              </div>
             </div>
           ))}
         </div>
