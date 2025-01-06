@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Calendar, Clock, MessageSquare, XOctagon } from "lucide-react";
 
 interface Appointment {
   id: string;
@@ -100,32 +101,77 @@ const Reservations = () => {
     fetchAppointments();
   }, [navigate, toast]);
 
-  const handleRebook = (appointment: Appointment) => {
-    // TODO: Implement rebooking logic
+  const handleCancel = async (appointmentId: string) => {
+    const { error } = await supabase
+      .from('appointments')
+      .update({ status: 'cancelled' })
+      .eq('id', appointmentId);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to cancel appointment",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({
+      title: "Success",
+      description: "Appointment cancelled successfully",
+    });
+
+    // Refresh appointments
+    window.location.reload();
+  };
+
+  const handleChat = (businessName: string) => {
+    // TODO: Implement chat functionality
     toast({
       title: "Coming Soon",
-      description: "Rebooking functionality will be available soon!",
+      description: `Chat with ${businessName} will be available soon!`,
     });
   };
 
-  const AppointmentCard = ({ appointment, showRebook = false }: { appointment: Appointment, showRebook?: boolean }) => (
+  const AppointmentCard = ({ appointment }: { appointment: Appointment }) => (
     <Card className="mb-4">
       <CardContent className="pt-6">
         <div className="flex justify-between items-start">
-          <div>
-            <h3 className="font-semibold">{appointment.service?.name}</h3>
+          <div className="space-y-2">
+            <h3 className="font-semibold text-lg">{appointment.service?.name}</h3>
             <p className="text-sm text-gray-600">{appointment.service?.business?.name}</p>
-            <p className="text-sm text-gray-600">
-              {new Date(appointment.start_time).toLocaleDateString()} at{' '}
-              {new Date(appointment.start_time).toLocaleTimeString()}
-            </p>
-            <p className="text-sm text-gray-600">Status: {appointment.status}</p>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Calendar className="w-4 h-4" />
+              <span>{new Date(appointment.start_time).toLocaleDateString()}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <Clock className="w-4 h-4" />
+              <span>{new Date(appointment.start_time).toLocaleTimeString()}</span>
+            </div>
+            <Badge variant={appointment.status === 'pending' ? 'default' : 'secondary'}>
+              {appointment.status}
+            </Badge>
           </div>
-          {showRebook && (
-            <Button variant="outline" onClick={() => handleRebook(appointment)}>
-              Rebook
+          <div className="flex gap-2">
+            {appointment.status === 'pending' && (
+              <Button
+                variant="destructive"
+                size="icon"
+                onClick={() => handleCancel(appointment.id)}
+                title="Cancel appointment"
+              >
+                <XOctagon className="w-4 h-4" />
+              </Button>
+            )}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => handleChat(appointment.service?.business?.name)}
+              title="Chat with business"
+            >
+              <MessageSquare className="w-4 h-4" />
             </Button>
-          )}
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -166,11 +212,7 @@ const Reservations = () => {
                   <p className="text-center text-gray-500">No past reservations</p>
                 ) : (
                   pastAppointments.map((appointment) => (
-                    <AppointmentCard 
-                      key={appointment.id} 
-                      appointment={appointment}
-                      showRebook={true}
-                    />
+                    <AppointmentCard key={appointment.id} appointment={appointment} />
                   ))
                 )}
               </CardContent>
