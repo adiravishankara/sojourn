@@ -43,16 +43,6 @@ const Login = () => {
               }
             },
             style: {
-              button: {
-                "[data-provider=facebook]": {
-                  backgroundColor: '#e5e7eb',
-                  color: '#9ca3af',
-                  cursor: 'not-allowed',
-                  '&:hover': {
-                    backgroundColor: '#e5e7eb',
-                  }
-                }
-              },
               message: {
                 color: 'rgb(220 38 38)',
                 marginTop: '8px',
@@ -60,7 +50,7 @@ const Login = () => {
               }
             }
           }}
-          providers={["google", "facebook"]}
+          providers={["google"]}
           redirectTo={window.location.origin}
           onError={(error) => {
             // If the error is about an unrecognized email, redirect to signup
