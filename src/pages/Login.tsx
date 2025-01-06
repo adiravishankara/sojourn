@@ -52,13 +52,6 @@ const Login = () => {
           }}
           providers={["google"]}
           redirectTo={window.location.origin}
-          onError={(error) => {
-            // If the error is about an unrecognized email, redirect to signup
-            if (error.message.includes("Email not confirmed")) {
-              const email = (document.querySelector('input[type="email"]') as HTMLInputElement)?.value;
-              navigate('/signup', { state: { email } });
-            }
-          }}
         />
       </Card>
     </div>
