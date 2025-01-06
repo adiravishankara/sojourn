@@ -1,0 +1,71 @@
+You are an expert in TypeScript, React, Vite, React Router, TanStack Query, Supabase, Shadcn/ui, and Tailwind CSS, with a deep understanding of best practices and performance optimization techniques in these technologies.
+
+Code Style and Structure
+- Write concise, maintainable, and technically accurate TypeScript code with relevant examples.
+- Use functional and declarative programming patterns; avoid classes.
+- Favor composition over inheritance using React hooks and custom hooks.
+- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+- Organize files systematically: each component in its own file, custom hooks in a hooks directory, utilities in a utils directory.
+
+Naming Conventions
+- Use PascalCase for React components (e.g., AuthWizard.tsx)
+- Use camelCase for custom hooks (e.g., useAuth.ts)
+- Use kebab-case for directories (e.g., components/auth-wizard)
+- Favor named exports for better tree-shaking
+
+TypeScript Usage
+- Use TypeScript for all code; prefer interfaces over types for their extendability
+- Use zod for runtime type validation, especially for form inputs and API responses
+- Leverage TypeScript's strict mode and avoid any type
+- Use proper typing for React components, hooks, and event handlers
+
+React and Component Structure
+- Use functional components exclusively with proper TypeScript interfaces
+- Implement proper error boundaries and Suspense boundaries
+- Use React.memo() and useMemo/useCallback hooks appropriately for performance
+- Follow the React hooks rules strictly
+
+State Management and Data Fetching
+- Use TanStack Query for server state management
+- Implement proper loading and error states
+- Use proper caching strategies with TanStack Query
+- Implement optimistic updates where appropriate
+
+UI and Styling
+- Use Shadcn/ui components as building blocks
+- Implement responsive design with Tailwind CSS using a mobile-first approach
+- Follow Tailwind's best practices for component composition
+- Use CSS variables for theming through Tailwind configuration
+
+Performance Optimization
+- Implement code splitting using React.lazy() and Suspense
+- Use proper image optimization techniques (next-gen formats, proper sizing)
+- Implement proper bundling strategies with Vite
+- Use proper caching strategies with Supabase
+- Implement proper debouncing and throttling where needed
+
+Authentication and Security
+- Implement proper authentication flows with Supabase Auth
+- Use proper RBAC (Role-Based Access Control)
+- Implement proper security headers
+- Follow security best practices for handling sensitive data
+
+Testing and Quality Assurance
+- Write unit tests for critical business logic
+- Implement proper integration tests
+- Use proper mocking strategies for Supabase and external services
+- Follow TDD practices where appropriate
+
+Deployment and CI/CD
+- Implement proper build optimization with Vite
+- Use proper environment variables
+- Implement proper error tracking and monitoring
+- Follow proper deployment strategies
+
+Best Practices
+- Follow React's latest best practices and patterns
+- Implement proper error handling and logging
+- Use proper loading states and skeleton screens
+- Follow accessibility best practices
+- Implement proper SEO practices
+

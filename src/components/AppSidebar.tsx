@@ -10,6 +10,7 @@ import {
   Building,
   LogOut,
   Users,
+  Bell,
 } from "lucide-react";
 import {
   Sidebar,
@@ -34,7 +35,7 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar>
+    <Sidebar className="fixed right-0">
       <SidebarContent>
         {/* Personal Section */}
         <SidebarGroup>

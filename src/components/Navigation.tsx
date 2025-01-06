@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MessageSquare } from "lucide-react";
+import { Search, MessageSquare, Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -39,6 +39,11 @@ export const Navigation = () => {
     console.log('Messages clicked');
   };
 
+  const handleNotifications = () => {
+    // TODO: Implement notifications functionality
+    console.log('Notifications clicked');
+  };
+
   return (
     <SidebarProvider defaultCollapsed={false}>
       <div className="min-h-screen flex w-full">
@@ -75,6 +80,14 @@ export const Navigation = () => {
                         className="relative"
                       >
                         <MessageSquare className="h-5 w-5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={handleNotifications}
+                        className="relative"
+                      >
+                        <Bell className="h-5 w-5" />
                       </Button>
                       <SidebarTrigger />
                     </>
