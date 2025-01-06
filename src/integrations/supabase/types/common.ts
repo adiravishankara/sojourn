@@ -1,3 +1,9 @@
+import { AppointmentTable } from './appointments';
+import { BusinessMediaTable, BusinessTable, BusinessUserTable } from './businesses';
+import { ServiceTable, ServiceAvailabilityTable } from './services';
+import { ProfileTable, FavoriteLocationTable } from './users';
+import { TransactionTable, ReviewTable } from './transactions';
+
 export type Json =
   | string
   | number
