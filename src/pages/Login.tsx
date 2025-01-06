@@ -44,7 +44,7 @@ const Login = () => {
             },
             style: {
               button: {
-                '&[data-provider="facebook"]': {
+                '[data-provider=facebook]': {
                   backgroundColor: '#e5e7eb',
                   color: '#9ca3af',
                   cursor: 'not-allowed',
