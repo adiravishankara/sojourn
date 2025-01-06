@@ -4,7 +4,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const Settings = () => {
@@ -12,8 +12,39 @@ const Settings = () => {
   const [pushNotifications, setPushNotifications] = useState(true);
   const { toast } = useToast();
 
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast({
+          title: "Error",
+          description: "You must be logged in to view settings",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('user_settings')
+        .select('*')
+        .eq('user_id', session.user.id)
+        .single();
+
+      if (error) {
+        console.error('Error fetching settings:', error);
+        return;
+      }
+
+      if (data) {
+        setEmailNotifications(data.email_notifications);
+        setPushNotifications(data.push_notifications);
+      }
+    };
+
+    fetchSettings();
+  }, [toast]);
+
   const handleSave = async () => {
-    // Implement settings save functionality
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       toast({
@@ -23,8 +54,7 @@ const Settings = () => {
       });
       return;
     }
-    
-    // Save user preferences to the database
+
     const { error } = await supabase
       .from('user_settings')
       .upsert({
@@ -32,13 +62,14 @@ const Settings = () => {
         email_notifications: emailNotifications,
         push_notifications: pushNotifications,
       });
-    
+
     if (error) {
       toast({
         title: "Error",
         description: "Failed to save settings",
         variant: "destructive",
       });
+      console.error('Error saving settings:', error);
     } else {
       toast({
         title: "Settings Saved",
