@@ -9,6 +9,7 @@ import {
   Building2,
   Building,
   LogOut,
+  Users,
 } from "lucide-react";
 import {
   Sidebar,
@@ -84,6 +85,14 @@ export function AppSidebar() {
                   <Link to="/settings">
                     <Settings />
                     <span>Settings</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link to="/invite">
+                    <Users />
+                    <span>Invite a Friend</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

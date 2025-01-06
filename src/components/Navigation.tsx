@@ -40,7 +40,7 @@ export const Navigation = () => {
   };
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <div className="min-h-screen flex w-full">
         {user && <AppSidebar />}
         <div className="flex-1">
@@ -67,14 +67,17 @@ export const Navigation = () => {
 
                 <div className="flex items-center gap-4">
                   {user ? (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={handleMessages}
-                      className="relative"
-                    >
-                      <MessageSquare className="h-5 w-5" />
-                    </Button>
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={handleMessages}
+                        className="relative"
+                      >
+                        <MessageSquare className="h-5 w-5" />
+                      </Button>
+                      <SidebarTrigger className="hidden md:flex" />
+                    </>
                   ) : (
                     <Button 
                       variant="default" 
@@ -99,7 +102,6 @@ export const Navigation = () => {
               </div>
             </div>
           </nav>
-          {/* Main content will be rendered here */}
         </div>
       </div>
     </SidebarProvider>
