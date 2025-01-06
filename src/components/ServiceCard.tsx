@@ -46,7 +46,6 @@ export const ServiceCard = ({
   const handleDateSelect = async (date: Date | undefined) => {
     setSelectedDate(date);
     if (date) {
-      // Fetch available times for the selected date
       const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
       const { data: availabilityData } = await supabase
         .from('service_availability')
@@ -56,7 +55,6 @@ export const ServiceCard = ({
         .single();
 
       if (availabilityData) {
-        // Generate time slots every hour between start and end time
         const times: string[] = [];
         const start = new Date(`2000-01-01 ${availabilityData.start_time}`);
         const end = new Date(`2000-01-01 ${availabilityData.end_time}`);
@@ -97,12 +95,10 @@ export const ServiceCard = ({
       return;
     }
 
-    // Combine date and time
     const startTime = new Date(selectedDate);
     const [hours, minutes] = selectedTime.split(':');
     startTime.setHours(parseInt(hours), parseInt(minutes));
 
-    // Add one hour for end time (you might want to use the actual service duration)
     const endTime = new Date(startTime);
     endTime.setHours(endTime.getHours() + 1);
 

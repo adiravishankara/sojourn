@@ -7,12 +7,12 @@ import { useToast } from "@/components/ui/use-toast";
 
 const BusinessDashboard = () => {
   const [loading, setLoading] = useState(true);
-  const [business, setBusiness] = useState<any>(null);
+  const [businessData, setBusinessData] = useState<any>(null);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    const loadBusiness = async () => {
+    const loadBusinessData = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
@@ -23,8 +23,7 @@ const BusinessDashboard = () => {
       const { data, error } = await supabase
         .from('businesses')
         .select('*')
-        .eq('owner_id', session.user.id)
-        .single();
+        .eq('owner_id', session.user.id);
 
       if (error) {
         toast({
@@ -35,18 +34,18 @@ const BusinessDashboard = () => {
         return;
       }
 
-      setBusiness(data);
+      setBusinessData(data);
       setLoading(false);
     };
 
-    loadBusiness();
+    loadBusinessData();
   }, [navigate, toast]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!business) {
+  if (!businessData) {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navigation />
@@ -67,10 +66,10 @@ const BusinessDashboard = () => {
       <main className="container mx-auto px-4 py-8">
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>{business.name}</CardTitle>
+            <CardTitle>{businessData.name}</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-600">{business.description}</p>
+            <p className="text-gray-600">{businessData.description}</p>
           </CardContent>
         </Card>
 
