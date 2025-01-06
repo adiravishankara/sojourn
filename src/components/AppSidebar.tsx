@@ -18,11 +18,12 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuButton,
 } from "@/components/ui/sidebar";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 export function AppSidebar() {
   const navigate = useNavigate();
@@ -41,60 +42,60 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/account">
-                    <User />
+                    <User className="mr-2" />
                     <span>Account</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/reservations">
-                    <Calendar />
+                    <Calendar className="mr-2" />
                     <span>Reservations</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/favorites">
-                    <Heart />
+                    <Heart className="mr-2" />
                     <span>Favorites</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/coupons">
-                    <Gift />
+                    <Gift className="mr-2" />
                     <span>Coupons</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/payment">
-                    <CreditCard />
+                    <CreditCard className="mr-2" />
                     <span>Payment</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/settings">
-                    <Settings />
+                    <Settings className="mr-2" />
                     <span>Settings</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/invite">
-                    <Users />
+                    <Users className="mr-2" />
                     <span>Invite a Friend</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
@@ -106,20 +107,20 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/register-business">
-                    <Building2 />
+                    <Building2 className="mr-2" />
                     <span>Register a Business</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild>
+                <Button variant="ghost" className="w-full justify-start" asChild>
                   <Link to="/b/dashboard">
-                    <Building />
+                    <Building className="mr-2" />
                     <span>My Businesses</span>
                   </Link>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
@@ -130,10 +131,10 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton onClick={handleSignOut}>
-                  <LogOut />
+                <Button variant="ghost" className="w-full justify-start" onClick={handleSignOut}>
+                  <LogOut className="mr-2" />
                   <span>Logout</span>
-                </SidebarMenuButton>
+                </Button>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

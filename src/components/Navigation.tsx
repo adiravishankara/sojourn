@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Menu, MessageSquare } from "lucide-react";
+import { Search, MessageSquare } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -40,7 +40,7 @@ export const Navigation = () => {
   };
 
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultCollapsed={false}>
       <div className="min-h-screen flex w-full">
         {user && <AppSidebar />}
         <div className="flex-1">
@@ -49,7 +49,7 @@ export const Navigation = () => {
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center gap-4">
                   {user && (
-                    <SidebarTrigger className="md:hidden" />
+                    <SidebarTrigger />
                   )}
                   <h1 className="text-xl font-bold text-primary-600">Sojourn</h1>
                 </div>
@@ -76,7 +76,7 @@ export const Navigation = () => {
                       >
                         <MessageSquare className="h-5 w-5" />
                       </Button>
-                      <SidebarTrigger className="hidden md:flex" />
+                      <SidebarTrigger />
                     </>
                   ) : (
                     <Button 
