@@ -2,15 +2,14 @@
 
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
 
 const sidebarVariants = cva(
-  "fixed top-0 left-0 z-40 h-screen transition-transform bg-background border-r",
+  "fixed top-0 right-0 z-40 h-screen transition-transform bg-background border-l",
   {
     variants: {
       collapsed: {
-        true: "-translate-x-full",
+        true: "translate-x-full",
         false: "translate-x-0",
       },
     },
@@ -70,7 +69,7 @@ export function SidebarTrigger() {
 
   return (
     <button
-      className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-background border"
+      className="p-2 rounded-lg hover:bg-gray-100"
       onClick={() => setCollapsed(!collapsed)}
     >
       <svg
