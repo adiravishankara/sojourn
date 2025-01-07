@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MessageSquare, Bell, MoreHorizontal } from "lucide-react";
+import { Search, MessageSquare, Bell } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -69,13 +69,6 @@ export const Navigation = () => {
                       className="relative"
                     >
                       <MessageSquare className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="relative"
-                    >
-                      <MoreHorizontal className="h-5 w-5" />
                     </Button>
                     <div>
                       <SidebarTrigger />
