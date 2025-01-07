@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MessageSquare } from "lucide-react";
+import { Search, MessageSquare, Bell, MoreHorizontal } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
@@ -12,12 +12,10 @@ export const Navigation = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
     });
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
       if (!session && event === 'SIGNED_OUT') {
@@ -34,23 +32,14 @@ export const Navigation = () => {
     navigate('/login');
   };
 
-  const handleMessages = () => {
-    // TODO: Implement messages functionality
-    console.log('Messages clicked');
-  };
-
   return (
-    <SidebarProvider defaultCollapsed={false}>
+    <SidebarProvider defaultCollapsed={true}>
       <div className="min-h-screen flex w-full">
-        {user && <AppSidebar />}
         <div className="flex-1">
           <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
             <div className="container mx-auto px-4">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center gap-4">
-                  {user && (
-                    <SidebarTrigger />
-                  )}
                   <h1 className="text-xl font-bold text-primary-600">Sojourn</h1>
                 </div>
                 
@@ -71,12 +60,25 @@ export const Navigation = () => {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={handleMessages}
+                        className="relative"
+                      >
+                        <Bell className="h-5 w-5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
                         className="relative"
                       >
                         <MessageSquare className="h-5 w-5" />
                       </Button>
-                      <SidebarTrigger />
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="relative"
+                      >
+                        <MoreHorizontal className="h-5 w-5" />
+                      </Button>
+                      <SidebarTrigger className="order-last" />
                     </>
                   ) : (
                     <Button 
@@ -103,6 +105,7 @@ export const Navigation = () => {
             </div>
           </nav>
         </div>
+        {user && <AppSidebar />}
       </div>
     </SidebarProvider>
   );

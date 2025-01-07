@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Button } from "@/components/ui/button";
 import { Grid, Map } from "lucide-react";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 // Mock data for initial development
 const services = [
@@ -47,28 +48,68 @@ const services = [
   }
 ];
 
+const categories = [
+  { id: 1, name: "Photography", icon: "📸" },
+  { id: 2, name: "Cleaning", icon: "🧹" },
+  { id: 3, name: "Fitness", icon: "💪" },
+  { id: 4, name: "Automotive", icon: "🚗" },
+  { id: 5, name: "Beauty", icon: "💅" },
+];
+
 const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navigation />
       
-      <main className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold text-gray-900">Popular Services</h2>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="icon">
-              <Grid className="h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="icon">
-              <Map className="h-4 w-4" />
-            </Button>
+      <main className="container mx-auto px-4">
+        {/* Categories Section */}
+        <div className="py-6 border-b">
+          <ScrollArea className="w-full whitespace-nowrap">
+            <div className="flex space-x-4">
+              {categories.map((category) => (
+                <Button
+                  key={category.id}
+                  variant="outline"
+                  className="flex-shrink-0"
+                >
+                  <span className="mr-2">{category.icon}</span>
+                  {category.name}
+                </Button>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
+
+        {/* Popular Services Section */}
+        <div className="py-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-semibold text-gray-900">Popular Services</h2>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" size="icon">
+                <Grid className="h-4 w-4" />
+              </Button>
+              <Button variant="outline" size="icon">
+                <Map className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {services.map((service) => (
+              <ServiceCard key={service.id} {...service} />
+            ))}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {services.map((service) => (
-            <ServiceCard key={service.id} {...service} />
-          ))}
+        {/* Services Near You Section */}
+        <div className="py-6">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">Services Near You</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {services.map((service) => (
+              <ServiceCard key={service.id} {...service} />
+            ))}
+          </div>
         </div>
       </main>
     </div>
