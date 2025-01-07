@@ -13,10 +13,15 @@ const Reservations = () => {
 
   useEffect(() => {
     const fetchReservations = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      const userId = session?.user?.id;
+
+      if (!userId) return;
+
       const { data, error } = await supabase
         .from('appointments')
         .select('*, services(name)')
-        .eq('user_id', supabase.auth.user()?.id);
+        .eq('user_id', userId);
 
       if (error) {
         toast({
