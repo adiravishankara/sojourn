@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, MessageSquare, Bell } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -36,9 +36,9 @@ export const Navigation = () => {
     <SidebarProvider defaultCollapsed={true}>
       <nav className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-12">
             <div className="flex items-center gap-4">
-              <h1 className="text-xl font-bold text-primary-600">Sojourn</h1>
+              <Link to="/" className="text-xl font-bold text-primary-600">Sojourn</Link>
             </div>
             
             <div className="hidden md:flex items-center flex-1 max-w-md mx-4">
@@ -46,7 +46,7 @@ export const Navigation = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <Input
                   type="search"
-                  placeholder="Search services..."
+                  placeholder="Search services1..."
                   className="w-full pl-10"
                 />
               </div>
@@ -90,7 +90,7 @@ export const Navigation = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <Input
                 type="search"
-                placeholder="Search services..."
+                placeholder="Search services2..."
                 className="w-full pl-10"
               />
             </div>

@@ -13,7 +13,7 @@ const services = [
     price: 199.99,
     rating: 4.8,
     category: "Photography",
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/metry-logo.png",
     businessName: "Creative Lens Studio"
   },
   {
@@ -23,7 +23,7 @@ const services = [
     price: 89.99,
     rating: 4.6,
     category: "Cleaning",
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/metry-logo.png",
     businessName: "Sparkle Home Services"
   },
   {
@@ -33,7 +33,7 @@ const services = [
     price: 75.00,
     rating: 4.9,
     category: "Fitness",
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/metry-logo.png",
     businessName: "Elite Fitness"
   },
   {
@@ -43,7 +43,7 @@ const services = [
     price: 149.99,
     rating: 4.7,
     category: "Automotive",
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/metry-logo.png",
     businessName: "Premium Auto Care"
   }
 ];
